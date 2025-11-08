@@ -1,124 +1,194 @@
-# Welcome to your Rork app
+# Food Scanner App 📱
 
-## Project info
+A comprehensive mobile application for scanning barcodes and analyzing food products. Built with React Native, Expo, and TypeScript, this app helps users make informed decisions about their food choices by providing detailed nutrition information, health scores, and calorie tracking.
 
-This is a native cross-platform mobile app created with [Rork](https://rork.com)
+## 🌟 Features
 
-**Platform**: Native iOS & Android app, exportable to web
-**Framework**: Expo Router + React Native
+### 📷 Barcode Scanning
+- **Camera-based scanning**: Scan product barcodes using your device's camera
+- **Manual lookup**: Enter barcode numbers manually for quick product search
+- **Real-time product lookup**: Instantly fetch product information from OpenFoodFacts database
 
-## How can I edit this code?
+### 📊 Product Information
+- **Detailed nutrition facts**: View comprehensive nutritional information including calories, macros, vitamins, and minerals
+- **Health score calculation**: Get an intelligent health score (A-E) based on nutritional content
+- **Product images**: High-quality product images for easy identification
+- **Ingredient analysis**: View complete ingredient lists and allergen information
+- **Nutri-Score & Eco-Score**: Display official Nutri-Score and Eco-Score ratings
+- **NOVA classification**: See ultra-processed food classification
 
-There are several ways of editing your native mobile application.
+### 📈 Calorie Tracking
+- **Daily calorie goals**: Set personalized calorie goals based on your profile (maintenance, cutting, or bulking)
+- **Real-time tracking**: Track calories consumed throughout the day
+- **Visual progress indicators**: Circular progress charts showing daily calorie intake
+- **Nutrition tracking**: Monitor macros (protein, carbs, fats) and other nutrients
+- **Food history**: View all tracked foods with timestamps
 
-### **Use Rork**
+### ⭐ Favorites
+- **Save products**: Save your favorite products for quick access
+- **Easy management**: Add or remove favorites with a single tap
 
-Simply visit [rork.com](https://rork.com) and prompt to build your app with AI.
+### 📜 History
+- **Scan history**: View all previously scanned products
+- **Quick access**: Easily revisit products you've scanned before
+- **Auto-saved**: All scans are automatically saved to history
 
-Changes made via Rork will be committed automatically to this GitHub repo.
+### 🔍 Compare Products
+- **Side-by-side comparison**: Compare up to 3 products simultaneously
+- **Nutritional comparison**: Compare calories, macros, vitamins, and minerals
+- **Easy selection**: Add products to comparison from product details or history
 
-Whenever you make a change in your local code editor and push it to GitHub, it will be also reflected in Rork.
+### 👤 User Profile
+- **Personal information**: Set age, height, weight, and gender
+- **Activity level**: Configure activity level (sedentary, light, moderate, active, very active)
+- **Calorie goals**: Automatic calculation of maintenance, cutting, and bulking calories
+- **BMI calculation**: View your Body Mass Index
+- **Daily tracking dashboard**: Monitor your daily nutrition intake and progress
 
-### **Use your preferred code editor**
+## 🚀 Getting Started
 
-If you want to work locally using your own code editor, you can clone this repo and push changes. Pushed changes will also be reflected in Rork.
+### Prerequisites
 
-If you are new to coding and unsure which editor to use, we recommend Cursor. If you're familiar with terminals, try Claude Code.
+- **Node.js** (v18 or higher) - [Install Node.js with nvm](https://github.com/nvm-sh/nvm)
+- **Bun** - [Install Bun](https://bun.sh/docs/installation)
+- **Expo Go** app on your mobile device (iOS/Android) - [Download from App Store](https://apps.apple.com/app/expo-go/id982107779) or [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)
 
-The only requirement is having Node.js & Bun installed - [install Node.js with nvm](https://github.com/nvm-sh/nvm) and [install Bun](https://bun.sh/docs/installation)
+### Installation
 
-Follow these steps:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/ayushkoli/Food-Scanner-App.git
+   cd Food-Scanner-App
+   ```
 
-```bash
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2. **Install dependencies**:
+   ```bash
+   bun install
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+3. **Start the development server**:
+   ```bash
+   bun run start
+   ```
 
-# Step 3: Install the necessary dependencies.
-bun i
+4. **Run on your device**:
+   - **iOS**: Press `i` in the terminal to open iOS Simulator, or scan the QR code with Expo Go app
+   - **Android**: Press `a` in the terminal to open Android Emulator, or scan the QR code with Expo Go app
+   - **Web**: Run `bun run start-web` to test in your browser
 
-# Step 4: Start the instant web preview of your Rork app in your browser, with auto-reloading of your changes
-bun run start-web
+## 🛠️ Technologies Used
 
-# Step 5: Start iOS preview
-# Option A (recommended):
-bun run start  # then press "i" in the terminal to open iOS Simulator
-# Option B (if supported by your environment):
-bun run start -- --ios
-```
-
-### **Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-## What technologies are used for this project?
-
-This project is built with the most popular native mobile cross-platform technical stack:
-
-- **React Native** - Cross-platform native mobile development framework created by Meta and used for Instagram, Airbnb, and lots of top apps in the App Store
-- **Expo** - Extension of React Native + platform used by Discord, Shopify, Coinbase, Telsa, Starlink, Eightsleep, and more
-- **Expo Router** - File-based routing system for React Native with support for web, server functions and SSR
+- **React Native** - Cross-platform mobile development framework
+- **Expo** - React Native framework and platform
+- **Expo Router** - File-based routing system for React Native
 - **TypeScript** - Type-safe JavaScript
+- **Expo Camera** - Camera functionality for barcode scanning
+- **AsyncStorage** - Local data persistence
 - **React Query** - Server state management
-- **Lucide React Native** - Beautiful icons
+- **Lucide React Native** - Beautiful icon library
+- **React Native Chart Kit** - Data visualization
+- **OpenFoodFacts API** - Product database and nutrition information
 
-## How can I test my app?
+## 📱 Platform Support
 
-### **On your phone (Recommended)**
+- ✅ **iOS** - Full support with native camera integration
+- ✅ **Android** - Full support with native camera integration
+- ✅ **Web** - Browser support (limited camera functionality)
 
-1. **iOS**: Download the [Rork app from the App Store](https://apps.apple.com/app/rork) or [Expo Go](https://apps.apple.com/app/expo-go/id982107779)
-2. **Android**: Download the [Expo Go app from Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)
-3. Run `bun run start` and scan the QR code from your development server
+## 📁 Project Structure
 
-### **In your browser**
-
-Run `bun start-web` to test in a web browser. Note: The browser preview is great for quick testing, but some native features may not be available.
-
-### **iOS Simulator / Android Emulator**
-
-You can test Rork apps in Expo Go or Rork iOS app. You don't need XCode or Android Studio for most features.
-
-**When do you need Custom Development Builds?**
-
-- Native authentication (Face ID, Touch ID, Apple Sign In)
-- In-app purchases and subscriptions
-- Push notifications
-- Custom native modules
-
-Learn more: [Expo Custom Development Builds Guide](https://docs.expo.dev/develop/development-builds/introduction/)
-
-If you have XCode (iOS) or Android Studio installed:
-
-```bash
-# iOS Simulator
-bun run start -- --ios
-
-# Android Emulator
-bun run start -- --android
+```
+├── app/                      # App screens (Expo Router)
+│   ├── (tabs)/              # Tab navigation screens
+│   │   ├── scan.tsx         # Barcode scanning screen
+│   │   ├── history.tsx      # Scan history screen
+│   │   ├── favorites.tsx    # Favorite products screen
+│   │   ├── compare.tsx      # Product comparison screen
+│   │   ├── profile.tsx      # User profile and tracking screen
+│   │   └── _layout.tsx      # Tab layout configuration
+│   ├── product/             # Product detail screens
+│   │   └── [code].tsx       # Dynamic product detail page
+│   ├── _layout.tsx          # Root layout
+│   └── +not-found.tsx       # 404 screen
+├── assets/                  # Static assets
+│   └── images/             # App icons and images
+├── constants/              # App constants and configuration
+│   └── colors.ts           # Color palette
+├── contexts/               # React contexts
+│   └── FoodScannerContext.tsx  # Main app context (state management)
+├── types/                  # TypeScript type definitions
+│   ├── product.ts          # Product-related types
+│   └── profile.ts          # User profile types
+├── utils/                  # Utility functions
+│   ├── healthScore.ts      # Health score calculation
+│   └── calorieCalculation.ts  # Calorie goal calculations
+├── app.json                # Expo configuration
+├── package.json            # Dependencies and scripts
+└── tsconfig.json           # TypeScript configuration
 ```
 
-## How can I deploy this project?
+## 🎯 Key Features Explained
 
-### **Publish to App Store (iOS)**
+### Health Score Algorithm
+The app calculates a health score (0-100) based on:
+- Sugar content (penalizes high sugar, rewards low sugar)
+- Salt content (penalizes high salt, rewards low salt)
+- Calorie density
+- Fat content (saturated vs unsaturated)
+- Protein content (rewards high protein)
+- Fiber content (rewards high fiber)
+- Processing level (NOVA classification)
+- Nutri-Score grade
+
+### Calorie Goal Calculation
+Calorie goals are calculated using the Mifflin-St Jeor equation:
+- **Maintenance**: Calories needed to maintain current weight
+- **Cutting**: 500 calories below maintenance (for weight loss)
+- **Bulking**: 500 calories above maintenance (for weight gain)
+
+Factors considered:
+- Age, height, weight, gender
+- Activity level (sedentary to very active)
+- Basal Metabolic Rate (BMR)
+- Total Daily Energy Expenditure (TDEE)
+
+## 📦 Available Scripts
+
+- `bun run start` - Start Expo development server
+- `bun run start-web` - Start web development server
+- `bun run start-tunnel` - Start with tunnel mode (for testing on devices outside local network)
+- `bun run lint` - Run ESLint to check code quality
+
+## 🔐 Permissions
+
+The app requires the following permissions:
+- **Camera**: For barcode scanning
+- **Photo Library** (iOS): For accessing saved images
+- **Storage** (Android): For accessing saved images
+
+## 🌐 API Integration
+
+The app uses the [OpenFoodFacts API](https://world.openfoodfacts.org/) to fetch product information:
+- Free and open-source database
+- Comprehensive product information
+- Updated regularly by the community
+- No API key required
+
+## 🚢 Deployment
+
+### iOS (App Store)
 
 1. **Install EAS CLI**:
-
    ```bash
    bun i -g @expo/eas-cli
    ```
 
 2. **Configure your project**:
-
    ```bash
    eas build:configure
    ```
 
 3. **Build for iOS**:
-
    ```bash
    eas build --platform ios
    ```
@@ -128,12 +198,9 @@ bun run start -- --android
    eas submit --platform ios
    ```
 
-For detailed instructions, visit [Expo's App Store deployment guide](https://docs.expo.dev/submit/ios/).
-
-### **Publish to Google Play (Android)**
+### Android (Google Play)
 
 1. **Build for Android**:
-
    ```bash
    eas build --platform android
    ```
@@ -143,14 +210,9 @@ For detailed instructions, visit [Expo's App Store deployment guide](https://doc
    eas submit --platform android
    ```
 
-For detailed instructions, visit [Expo's Google Play deployment guide](https://docs.expo.dev/submit/android/).
-
-### **Publish as a Website**
-
-Your React Native app can also run on the web:
+### Web Deployment
 
 1. **Build for web**:
-
    ```bash
    eas build --platform web
    ```
@@ -161,158 +223,28 @@ Your React Native app can also run on the web:
    eas hosting:deploy
    ```
 
-Alternative web deployment options:
+Or deploy to:
+- **Vercel**: Connect GitHub repo for automatic deployments
+- **Netlify**: Connect GitHub repo for automatic deployments
 
-- **Vercel**: Deploy directly from your GitHub repository
-- **Netlify**: Connect your GitHub repo to Netlify for automatic deployments
+## 🤝 Contributing
 
-## App Features
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This template includes:
+## 📄 License
 
-- **Cross-platform compatibility** - Works on iOS, Android, and Web
-- **File-based routing** with Expo Router
-- **Tab navigation** with customizable tabs
-- **Modal screens** for overlays and dialogs
-- **TypeScript support** for better development experience
-- **Async storage** for local data persistence
-- **Vector icons** with Lucide React Native
+This project is private and not licensed for public use.
 
-## Project Structure
+## 🙏 Acknowledgments
 
-```
-├── app/                    # App screens (Expo Router)
-│   ├── (tabs)/            # Tab navigation screens
-│   │   ├── _layout.tsx    # Tab layout configuration
-│   │   └── index.tsx      # Home tab screen
-│   ├── _layout.tsx        # Root layout
-│   ├── modal.tsx          # Modal screen example
-│   └── +not-found.tsx     # 404 screen
-├── assets/                # Static assets
-│   └── images/           # App icons and images
-├── constants/            # App constants and configuration
-├── app.json             # Expo configuration
-├── package.json         # Dependencies and scripts
-└── tsconfig.json        # TypeScript configuration
-```
+- [OpenFoodFacts](https://world.openfoodfacts.org/) - For providing the product database
+- [Expo](https://expo.dev/) - For the amazing development platform
+- [React Native](https://reactnative.dev/) - For the cross-platform framework
 
-## Custom Development Builds
+## 📞 Support
 
-For advanced native features, you'll need to create a Custom Development Build instead of using Expo Go.
+For issues, questions, or suggestions, please open an issue on the GitHub repository.
 
-### **When do you need a Custom Development Build?**
+---
 
-- **Native Authentication**: Face ID, Touch ID, Apple Sign In, Google Sign In
-- **In-App Purchases**: App Store and Google Play subscriptions
-- **Advanced Native Features**: Third-party SDKs, platform-specifc features (e.g. Widgets on iOS)
-- **Background Processing**: Background tasks, location tracking
-
-### **Creating a Custom Development Build**
-
-```bash
-# Install EAS CLI
-bun i -g @expo/eas-cli
-
-# Configure your project for development builds
-eas build:configure
-
-# Create a development build for your device
-eas build --profile development --platform ios
-eas build --profile development --platform android
-
-# Install the development build on your device and start developing
-bun start --dev-client
-```
-
-**Learn more:**
-
-- [Development Builds Introduction](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Creating Development Builds](https://docs.expo.dev/develop/development-builds/create-a-build/)
-- [Installing Development Builds](https://docs.expo.dev/develop/development-builds/installation/)
-
-## Advanced Features
-
-### **Add a Database**
-
-Integrate with backend services:
-
-- **Supabase** - PostgreSQL database with real-time features
-- **Firebase** - Google's mobile development platform
-- **Custom API** - Connect to your own backend
-
-### **Add Authentication**
-
-Implement user authentication:
-
-**Basic Authentication (works in Expo Go):**
-
-- **Expo AuthSession** - OAuth providers (Google, Facebook, Apple) - [Guide](https://docs.expo.dev/guides/authentication/)
-- **Supabase Auth** - Email/password and social login - [Integration Guide](https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native)
-- **Firebase Auth** - Comprehensive authentication solution - [Setup Guide](https://docs.expo.dev/guides/using-firebase/)
-
-**Native Authentication (requires Custom Development Build):**
-
-- **Apple Sign In** - Native Apple authentication - [Implementation Guide](https://docs.expo.dev/versions/latest/sdk/apple-authentication/)
-- **Google Sign In** - Native Google authentication - [Setup Guide](https://docs.expo.dev/guides/google-authentication/)
-
-### **Add Push Notifications**
-
-Send notifications to your users:
-
-- **Expo Notifications** - Cross-platform push notifications
-- **Firebase Cloud Messaging** - Advanced notification features
-
-### **Add Payments**
-
-Monetize your app:
-
-**Web & Credit Card Payments (works in Expo Go):**
-
-- **Stripe** - Credit card payments and subscriptions - [Expo + Stripe Guide](https://docs.expo.dev/guides/using-stripe/)
-- **PayPal** - PayPal payments integration - [Setup Guide](https://developer.paypal.com/docs/checkout/mobile/react-native/)
-
-**Native In-App Purchases (requires Custom Development Build):**
-
-- **RevenueCat** - Cross-platform in-app purchases and subscriptions - [Expo Integration Guide](https://www.revenuecat.com/docs/expo)
-- **Expo In-App Purchases** - Direct App Store/Google Play integration - [Implementation Guide](https://docs.expo.dev/versions/latest/sdk/in-app-purchases/)
-
-**Paywall Optimization:**
-
-- **Superwall** - Paywall A/B testing and optimization - [React Native SDK](https://docs.superwall.com/docs/react-native)
-- **Adapty** - Mobile subscription analytics and paywalls - [Expo Integration](https://docs.adapty.io/docs/expo)
-
-## I want to use a custom domain - is that possible?
-
-For web deployments, you can use custom domains with:
-
-- **EAS Hosting** - Custom domains available on paid plans
-- **Netlify** - Free custom domain support
-- **Vercel** - Custom domains with automatic SSL
-
-For mobile apps, you'll configure your app's deep linking scheme in `app.json`.
-
-## Troubleshooting
-
-### **App not loading on device?**
-
-1. Make sure your phone and computer are on the same WiFi network
-2. Try using tunnel mode: `bun start -- --tunnel`
-3. Check if your firewall is blocking the connection
-
-### **Build failing?**
-
-1. Clear your cache: `bunx expo start --clear`
-2. Delete `node_modules` and reinstall: `rm -rf node_modules && bun install`
-3. Check [Expo's troubleshooting guide](https://docs.expo.dev/troubleshooting/build-errors/)
-
-### **Need help with native features?**
-
-- Check [Expo's documentation](https://docs.expo.dev/) for native APIs
-- Browse [React Native's documentation](https://reactnative.dev/docs/getting-started) for core components
-- Visit [Rork's FAQ](https://rork.com/faq) for platform-specific questions
-
-## About Rork
-
-Rork builds fully native mobile apps using React Native and Expo - the same technology stack used by Discord, Shopify, Coinbase, Instagram, and nearly 30% of the top 100 apps on the App Store.
-
-Your Rork app is production-ready and can be published to both the App Store and Google Play Store. You can also export your app to run on the web, making it truly cross-platform.
+**Made with ❤️ using React Native and Expo**
