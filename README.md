@@ -63,12 +63,12 @@ A comprehensive mobile application for scanning barcodes and analyzing food prod
 
 2. **Install dependencies**:
    ```bash
-   bun install
+   npm i
    ```
 
 3. **Start the development server**:
    ```bash
-   bun run start
+   npm run start
    ```
 
 4. **Run on your device**:
