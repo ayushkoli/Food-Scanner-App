@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, Platform } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import { Clock, Trash2 } from 'lucide-react-native';
 import { useFoodScanner } from '../../contexts/FoodScannerContext';
@@ -54,19 +54,19 @@ export default function HistoryScreen() {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          title: 'Scan History',
-          headerStyle: { backgroundColor: '#7C3AED' },
-          headerTintColor: '#fff',
-          headerRight: () =>
-            history.length > 0 ? (
-              <TouchableOpacity onPress={clearHistory} style={styles.clearButton}>
-                <Trash2 size={20} color="#fff" />
-              </TouchableOpacity>
-            ) : null,
-        }}
-      />
+      <Stack.Screen options={{ headerShown: false }} />
+
+      {/* Header */}
+      <View style={styles.header}>
+        <View style={styles.headerContent}>
+          <Text style={styles.logo}>History</Text>
+          {history.length > 0 && (
+            <TouchableOpacity onPress={clearHistory} style={styles.clearButton}>
+              <Trash2 size={20} color="#EF4444" />
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
 
       {history.length === 0 ? (
         <View style={styles.emptyContainer}>
@@ -94,21 +94,45 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F9FAFB',
   },
+  header: {
+    backgroundColor: '#fff',
+    paddingTop: Platform.OS === 'ios' ? 60 : 40,
+    paddingBottom: 16,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  logo: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#0096FF',
+  },
   clearButton: {
-    marginRight: 16,
     padding: 8,
+    borderRadius: 8,
+    backgroundColor: '#FEF2F2',
   },
   listContent: {
-    padding: 16,
+    padding: 20,
   },
   historyItem: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 12,
+    borderRadius: 16,
+    padding: 16,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#E5E7EB',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   },
   productImage: {
     width: 80,
@@ -137,7 +161,7 @@ const styles = StyleSheet.create({
   },
   brandName: {
     fontSize: 14,
-    color: '#7C3AED',
+    color: '#0096FF',
     marginBottom: 8,
   },
   timeContainer: {

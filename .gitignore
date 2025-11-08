@@ -35,6 +35,3 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 .vercel
-
-# Windows reserved names
-nul

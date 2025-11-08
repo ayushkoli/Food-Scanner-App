@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
+    Platform,
   } from 'react-native';
 import { Stack } from 'expo-router';
 import { GitCompare, X } from 'lucide-react-native';
@@ -37,19 +38,19 @@ export default function CompareScreen() {
   
     return (
       <View style={styles.container}>
-        <Stack.Screen
-          options={{
-            title: 'Compare Products',
-            headerStyle: { backgroundColor: '#7C3AED' },
-            headerTintColor: '#fff',
-            headerRight: () =>
-              comparison.length > 0 ? (
-                <TouchableOpacity onPress={clearComparison} style={styles.clearButton}>
-                  <Text style={styles.clearButtonText}>Clear All</Text>
-                </TouchableOpacity>
-              ) : null,
-          }}
-        />
+        <Stack.Screen options={{ headerShown: false }} />
+
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.headerContent}>
+            <Text style={styles.logo}>Compare</Text>
+            {comparison.length > 0 && (
+              <TouchableOpacity onPress={clearComparison} style={styles.clearButton}>
+                <Text style={styles.clearButtonText}>Clear All</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
   
         {comparison.length === 0 ? (
           <View style={styles.emptyContainer}>
@@ -123,15 +124,32 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#F9FAFB',
     },
+    header: {
+      backgroundColor: '#fff',
+      paddingTop: Platform.OS === 'ios' ? 60 : 40,
+      paddingBottom: 16,
+      paddingHorizontal: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#E5E7EB',
+    },
+    headerContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    logo: {
+      fontSize: 24,
+      fontWeight: '700',
+      color: '#0096FF',
+    },
     clearButton: {
-      marginRight: 16,
       paddingHorizontal: 12,
       paddingVertical: 6,
-      backgroundColor: 'rgba(255,255,255,0.2)',
-      borderRadius: 6,
+      backgroundColor: '#FEF2F2',
+      borderRadius: 8,
     },
     clearButtonText: {
-      color: '#fff',
+      color: '#EF4444',
       fontSize: 14,
       fontWeight: '600' as const,
     },
@@ -140,17 +158,22 @@ const styles = StyleSheet.create({
     },
     productsRow: {
       flexDirection: 'row',
-      padding: 16,
+      padding: 20,
       gap: 8,
     },
     productCard: {
       width: CARD_WIDTH,
       backgroundColor: '#fff',
-      borderRadius: 12,
-      padding: 8,
+      borderRadius: 16,
+      padding: 12,
       borderWidth: 1,
       borderColor: '#E5E7EB',
       position: 'relative',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 8,
+      elevation: 2,
     },
     removeButton: {
       position: 'absolute',
@@ -187,14 +210,14 @@ const styles = StyleSheet.create({
     },
     brandName: {
       fontSize: 10,
-      color: '#7C3AED',
+      color: '#0096FF',
     },
     comparisonTable: {
-      padding: 16,
+      padding: 20,
       paddingTop: 0,
     },
     tableTitle: {
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: '700' as const,
       color: '#111827',
       marginBottom: 16,
@@ -203,10 +226,15 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       marginBottom: 12,
       backgroundColor: '#fff',
-      borderRadius: 8,
-      padding: 12,
+      borderRadius: 16,
+      padding: 16,
       borderWidth: 1,
       borderColor: '#E5E7EB',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 8,
+      elevation: 2,
     },
     labelCell: {
       width: 100,

@@ -11,7 +11,7 @@ export function calculateHealthScore(product: Product): HealthScore {
     warnings.push(`High sugar content: ${nutriments.sugars_100g.toFixed(1)}g per 100g`);
   } else if (nutriments.sugars_100g !== undefined && nutriments.sugars_100g < 5) {
     score += 5;
-    positives.push('Low sugar content');
+    positives.push('Very low sugar content');
   }
 
   if (nutriments.salt_100g !== undefined && nutriments.salt_100g > 1.5) {
@@ -19,16 +19,22 @@ export function calculateHealthScore(product: Product): HealthScore {
     warnings.push(`High salt content: ${nutriments.salt_100g.toFixed(2)}g per 100g`);
   } else if (nutriments.salt_100g !== undefined && nutriments.salt_100g < 0.3) {
     score += 5;
-    positives.push('Low salt content');
+    positives.push('Very low salt content');
   }
 
   const calories = nutriments['energy-kcal_100g'] || nutriments.energy_100g;
-  if (calories !== undefined && calories > 400) {
+  if (calories !== undefined && calories > 500) {
     score -= 15;
+    warnings.push(`Very high calorie content: ${calories.toFixed(0)} kcal per 100g`);
+  } else if (calories !== undefined && calories > 400) {
+    score -= 10;
     warnings.push(`High calorie content: ${calories.toFixed(0)} kcal per 100g`);
   }
 
-  if (nutriments.proteins_100g !== undefined && nutriments.proteins_100g > 10) {
+  if (nutriments.proteins_100g !== undefined && nutriments.proteins_100g > 20) {
+    score += 15;
+    positives.push(`Excellent protein content: ${nutriments.proteins_100g.toFixed(1)}g per 100g`);
+  } else if (nutriments.proteins_100g !== undefined && nutriments.proteins_100g > 10) {
     score += 10;
     positives.push(`Good protein content: ${nutriments.proteins_100g.toFixed(1)}g per 100g`);
   }

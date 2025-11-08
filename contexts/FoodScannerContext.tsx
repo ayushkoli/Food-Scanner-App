@@ -2,10 +2,14 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import createContextHook from '@nkzw/create-context-hook';
 import { Product, HistoryItem, OpenFoodFactsResponse } from '../types/product';
+import { UserProfile, TrackedFood, DailyCalorieTracking } from '../types/profile';
+import { calculateCalorieGoals, calculateNutritionForAmount } from '../utils/calorieCalculation';
 
 const HISTORY_KEY = '@food_scanner_history';
 const FAVORITES_KEY = '@food_scanner_favorites';
 const COMPARISON_KEY = '@food_scanner_comparison';
+const PROFILE_KEY = '@food_scanner_profile';
+const TRACKED_FOODS_KEY = '@food_scanner_tracked_foods';
 const MAX_HISTORY_ITEMS = 20;
 const MAX_COMPARISON_ITEMS = 3;
 
@@ -13,6 +17,8 @@ export const [FoodScannerProvider, useFoodScanner] = createContextHook(() => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [favorites, setFavorites] = useState<Product[]>([]);
   const [comparison, setComparison] = useState<Product[]>([]);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [trackedFoods, setTrackedFoods] = useState<TrackedFood[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -21,15 +27,19 @@ export const [FoodScannerProvider, useFoodScanner] = createContextHook(() => {
 
   const loadStoredData = async () => {
     try {
-      const [historyData, favoritesData, comparisonData] = await Promise.all([
+      const [historyData, favoritesData, comparisonData, profileData, trackedFoodsData] = await Promise.all([
         AsyncStorage.getItem(HISTORY_KEY),
         AsyncStorage.getItem(FAVORITES_KEY),
         AsyncStorage.getItem(COMPARISON_KEY),
+        AsyncStorage.getItem(PROFILE_KEY),
+        AsyncStorage.getItem(TRACKED_FOODS_KEY),
       ]);
 
       if (historyData) setHistory(JSON.parse(historyData));
       if (favoritesData) setFavorites(JSON.parse(favoritesData));
       if (comparisonData) setComparison(JSON.parse(comparisonData));
+      if (profileData) setProfile(JSON.parse(profileData));
+      if (trackedFoodsData) setTrackedFoods(JSON.parse(trackedFoodsData));
     } catch (error) {
       console.error('Error loading stored data:', error);
     } finally {
@@ -176,10 +186,88 @@ export const [FoodScannerProvider, useFoodScanner] = createContextHook(() => {
     [comparison]
   );
 
+  const saveProfile = useCallback(async (userProfile: UserProfile) => {
+    try {
+      setProfile(userProfile);
+      await AsyncStorage.setItem(PROFILE_KEY, JSON.stringify(userProfile));
+    } catch (error) {
+      console.error('Error saving profile:', error);
+    }
+  }, []);
+
+  const getCalorieGoals = useCallback(() => {
+    if (!profile) return null;
+    return calculateCalorieGoals(profile);
+  }, [profile]);
+
+  const addTrackedFood = useCallback(async (product: Product, amount: number, servingSize?: number) => {
+    const today = new Date().toISOString().split('T')[0];
+    const trackedFood: TrackedFood = {
+      id: `${product.code}-${Date.now()}`,
+      product: {
+        code: product.code,
+        product_name: product.product_name,
+        image_url: product.image_url,
+        nutriments: product.nutriments,
+      },
+      amount,
+      servingSize,
+      date: today,
+      timestamp: Date.now(),
+    };
+
+    setTrackedFoods((prev) => {
+      const newFoods = [...prev, trackedFood];
+      AsyncStorage.setItem(TRACKED_FOODS_KEY, JSON.stringify(newFoods)).catch((error) => {
+        console.error('Error saving tracked foods:', error);
+      });
+      return newFoods;
+    });
+  }, []);
+
+  const removeTrackedFood = useCallback(async (foodId: string) => {
+    setTrackedFoods((prev) => {
+      const newFoods = prev.filter((food) => food.id !== foodId);
+      AsyncStorage.setItem(TRACKED_FOODS_KEY, JSON.stringify(newFoods)).catch((error) => {
+        console.error('Error saving tracked foods:', error);
+      });
+      return newFoods;
+    });
+  }, []);
+
+  const getDailyTracking = useCallback((date: string): DailyCalorieTracking => {
+    const dayFoods = trackedFoods.filter((food) => food.date === date);
+    const totals = dayFoods.reduce(
+      (acc, food) => {
+        const nutrition = calculateNutritionForAmount(food.product.nutriments, food.amount);
+        return {
+          totalCalories: acc.totalCalories + nutrition.calories,
+          totalFat: acc.totalFat + nutrition.fat,
+          totalCarbs: acc.totalCarbs + nutrition.carbs,
+          totalProtein: acc.totalProtein + nutrition.protein,
+        };
+      },
+      { totalCalories: 0, totalFat: 0, totalCarbs: 0, totalProtein: 0 }
+    );
+
+    return {
+      date,
+      foods: dayFoods,
+      ...totals,
+    };
+  }, [trackedFoods]);
+
+  const getTodayTracking = useCallback((): DailyCalorieTracking => {
+    const today = new Date().toISOString().split('T')[0];
+    return getDailyTracking(today);
+  }, [getDailyTracking]);
+
   return useMemo(() => ({
     history,
     favorites,
     comparison,
+    profile,
+    trackedFoods,
     isLoading,
     fetchProduct,
     addToHistory,
@@ -190,5 +278,11 @@ export const [FoodScannerProvider, useFoodScanner] = createContextHook(() => {
     removeFromComparison,
     clearComparison,
     isInComparison,
-  }), [history, favorites, comparison, isLoading, fetchProduct, addToHistory, clearHistory, toggleFavorite, isFavorite, addToComparison, removeFromComparison, clearComparison, isInComparison]);
+    saveProfile,
+    getCalorieGoals,
+    addTrackedFood,
+    removeTrackedFood,
+    getDailyTracking,
+    getTodayTracking,
+  }), [history, favorites, comparison, profile, trackedFoods, isLoading, fetchProduct, addToHistory, clearHistory, toggleFavorite, isFavorite, addToComparison, removeFromComparison, clearComparison, isInComparison, saveProfile, getCalorieGoals, addTrackedFood, removeTrackedFood, getDailyTracking, getTodayTracking]);
 });

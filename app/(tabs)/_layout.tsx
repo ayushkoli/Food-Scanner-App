@@ -1,12 +1,12 @@
 import { Tabs } from "expo-router";
-import { Scan, Clock, Heart, GitCompare } from "lucide-react-native";
+import { Scan, Clock, Heart, GitCompare, User } from "lucide-react-native";
 import React from "react";
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#7C3AED',
+        tabBarActiveTintColor: '#0096FF',
         tabBarInactiveTintColor: '#9CA3AF',
         headerShown: true,
         tabBarStyle: {
@@ -42,6 +42,13 @@ export default function TabLayout() {
         options={{
           title: "Compare",
           tabBarIcon: ({ color }) => <GitCompare size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => <User size={24} color={color} />,
         }}
       />
     </Tabs>
